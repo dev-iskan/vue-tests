@@ -89,3 +89,58 @@ structure:
     we create __tests__ folder where we create special files with same name as component for example AppHello
     in the file we describe again test with same name as component and test file itself, where inside each
     function we assign test with only one assertion and name it with its responsibillity, it('renders Hello text')
+
+
+
+when we mount component to be tested we can pass as secong arg object with some data which should be passed to component:
+
+let text = 'Home'
+let wrapper = mount(AppHeader, {
+    propsData: {
+    text
+    }
+})
+
+
+test whether component contains class we use:
+    expect(wrapper.classes()).toContain('tag--dark') or
+    expect(wrapper.classes()).toEqual(['tag'])
+
+
+test clicking:
+it('renders out text on click', () => {
+    // add to wrapper our component and we can pass data as second arg
+    let text = 'Reveal'
+    let wrapper = mount(AppReveal, {
+        propsData: {
+        text
+        }
+    })
+
+    // method find finds dom element and make it as wrapper, then we can get values of the anchor wrapper
+    console.log(wrapper.find('a').text())
+
+    // triggers click on anchor wrapper
+    wrapper.find('a').trigger('click')
+
+    expect(wrapper.html()).toContain(text)
+    expect(wrapper.html()).not.toContain('Click to reveal') // expect anchor to be hidden
+    })
+
+    it('hides anchor on click', () => {
+    // add to wrapper our component and we can pass data as second arg
+    let text = 'Reveal'
+    let wrapper = mount(AppReveal, {
+        propsData: {
+        text
+        }
+    })
+
+    // method find finds dom element and make it as wrapper, then we can get values of the anchor wrapper
+    console.log(wrapper.find('a').text())
+
+    // triggers click on anchor wrapper
+    wrapper.find('a').trigger('click')
+
+    expect(wrapper.find('a').exists()).toBe(false) // after clicking anchor should be destroyed from virtual DOM thus it shouldn't be exists
+    })
