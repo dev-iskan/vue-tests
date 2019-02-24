@@ -3,16 +3,16 @@
 
 // import vue component
 import {mount} from '@vue/test-utils'
-import TestComponent from './TestComponent'
+import AppHello from '../AppHello'
 
 
 // run simple test
-describe('test', () => {
-  it('works', () => {
+describe('AppHello', () => {
+  it('renders out hello text', () => {
     // add to wrapper our component
-    let wrapper = mount(TestComponent)
+    let wrapper = mount(AppHello)
 
     // helper which render and return html
-    expect(wrapper.html()).toContain('Hello vue')
+    expect(wrapper.html()).toContain('Hello')
   })
 })

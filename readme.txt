@@ -77,3 +77,15 @@ describe('test', () => {
 
 here we create test called 'test' 
 which should do works assertion which should test whether component contain in html 'Hello vue' or not
+
+
+
+
+In order to run single test we just need to specify name:
+npm run test App.. where actually name is regexp which finds all matching tests
+
+structure:
+    structure of tests should be like, if you want to test component in base folder of component
+    we create __tests__ folder where we create special files with same name as component for example AppHello
+    in the file we describe again test with same name as component and test file itself, where inside each
+    function we assign test with only one assertion and name it with its responsibillity, it('renders Hello text')

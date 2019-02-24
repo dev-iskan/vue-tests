@@ -1,7 +1,6 @@
 <template>
   <div>
-    <p>Hello vue</p> <!-- True test -->
-    <p>Hello</p> <!-- False test -->
+    <p>Hello</p>
   </div>
 </template>
 
