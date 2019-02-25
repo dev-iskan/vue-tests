@@ -2,6 +2,9 @@
 /* eslint-disable no-unused-vars */
 
 // import vue component
+
+
+// long way to implement vue router
 import {mount, createLocalVue} from '@vue/test-utils'
 import AppButton from '../AppButton'
 import VueRouter from 'vue-router'
