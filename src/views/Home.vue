@@ -5,6 +5,7 @@
       <li>Item one</li>
     </app-list>
     <app-form-input v-model="body"></app-form-input>
+    <app-button :to="{name: 'dashboard'}" text="Dashboard"></app-button>
   </div>
 </template>
 
@@ -13,12 +14,14 @@
 import AppTag from '@/components/elements/tag/AppTag'
 import AppList from '@/components/elements/list/AppList'
 import AppFormInput from '@/components/elements/form/AppFormInput'
+import AppButton from '@/components/elements/button/AppButton'
 export default {
   name: 'home',
   components: {
     AppList,
     AppFormInput,
-    AppTag
+    AppTag,
+    AppButton
   },
   data () {
     return {
