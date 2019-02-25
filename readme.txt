@@ -144,3 +144,66 @@ it('renders out text on click', () => {
 
     expect(wrapper.find('a').exists()).toBe(false) // after clicking anchor should be destroyed from virtual DOM thus it shouldn't be exists
     })
+
+
+we can also test if passed through slot is exists:
+    // add to wrapper our component and we can pass data as second arg
+    let wrapper = mount(AppList, {
+      slots: {
+        // we pass to  default slot without name
+        default: headerWrapper,
+        // named  slot
+        items: '<li>Item one</li>'
+      }
+    })
+
+also we can pass component to it as above headerWrapper, here we render real vue component, not test component:
+    // in case we want to pass component:
+    let headerWrapper = {
+      render(h) {
+        return h(AppHeader, {
+          props: {
+            text: 'Home'
+          }
+        })
+      }
+    }
+
+
+asserting event triggered correctly:
+    it('assert initial value', () => {
+    // add to wrapper our component and we can pass data as second arg
+    let wrapper = mount(AppFormInput, {
+      propsData: {
+        modelValue: 'cats'
+      }
+    })
+
+    // expect wrapper to  find input tag get it element's value
+    expect(wrapper.find('input').element.value).toEqual('cats')
+  })
+
+  it('emits input to be truthy', () => {
+    // add to wrapper our component and we can pass data as second arg
+    let wrapper = mount(AppFormInput)
+    let input = wrapper.find('input')
+
+    //trigger event
+    input.trigger('input')
+
+    // test if input event emitted
+    expect(wrapper.emitted().input).toBeTruthy()
+  }) 
+
+  it('emits the current input value', () => {
+    // add to wrapper our component and we can pass data as second arg
+    let wrapper = mount(AppFormInput)
+    let input = wrapper.find('input')
+    input.element.value = 'cats'
+
+    //trigger event
+    input.trigger('input')
+    console.log(wrapper.emitted().input)
+    // test if input event emitted
+    expect(wrapper.emitted().input[0][0]).toEqual('cats')
+  }) 
