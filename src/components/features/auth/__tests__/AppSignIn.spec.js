@@ -3,6 +3,9 @@
 import {mount, RouterLinkStub} from '@vue/test-utils'
 import AppSignIn from '../AppSignIn'
 
+const $route = {
+  fullPath: '/dashboard'
+}
 // run simple test
 describe('AppSignIn', () => {
   it('renders link correctly', () => {
@@ -10,16 +13,15 @@ describe('AppSignIn', () => {
     let wrapper = mount(AppSignIn, {
       stubs: {
         RouterLink: RouterLinkStub
+      },
+      mocks: {
+        $route: $route
       }
     })
 
     expect(wrapper.find('a').props().to.name).toEqual('auth-signin')
   })
 
-
-  const $route = {
-    fullPath: '/dashboard'
-  }
 
   it('has redirect path', () => {
     // add to wrapper our component
@@ -29,7 +31,7 @@ describe('AppSignIn', () => {
       },
 
       mocks: {
-        $route
+        $route: $route
       }
     })
 
