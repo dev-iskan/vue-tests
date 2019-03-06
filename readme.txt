@@ -465,3 +465,30 @@ describe('AppCountdown', () => {
         jest.clearAllTimers()
     })
 })
+
+
+
+simulated using mixins:
+it ('greets the user by their first name', () => {
+        // mock mixin
+        let auth = {
+            computed: {
+                $auth () {
+                    return {
+                        user: {
+                            first_name: 'Alex'
+                        }
+                    }
+                }
+            }
+        }
+
+        // mount mixin in AppGreeting
+        let wrapper = mount(AppGreeting, {
+            mixins: [
+                auth
+            ]
+        })
+
+        expect(wrapper.html()).toContain('Hi, Alex')
+    })
