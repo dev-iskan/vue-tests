@@ -305,3 +305,15 @@ it ('renders a list of notifications', () => {
         expect(items.at(1).text()).toContain('Second notification')
     })
 })
+
+
+
+In order to test value on each stage of life cycle of vue we can use wrapper's property vm:
+it ('clears up when destroyed', () => {
+    let wrapper = mount(AppPlayer)
+
+    wrapper.destroy()
+    expect(wrapper.vm.player).toBe(null)
+})
+
+it tests whether player is destroyed after component to be destroyed
