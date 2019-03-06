@@ -6,6 +6,8 @@
     </app-list>
     <app-form-input v-model="body"></app-form-input>
     <app-button :to="{name: 'dashboard'}" text="Dashboard"></app-button>
+
+    <app-notifications></app-notifications>
   </div>
 </template>
 
@@ -15,13 +17,15 @@ import AppTag from '@/components/elements/tag/AppTag'
 import AppList from '@/components/elements/list/AppList'
 import AppFormInput from '@/components/elements/form/AppFormInput'
 import AppButton from '@/components/elements/button/AppButton'
+import AppNotifications from '@/components/features/notification/AppNotifications'
 export default {
   name: 'home',
   components: {
     AppList,
     AppFormInput,
     AppTag,
-    AppButton
+    AppButton,
+    AppNotifications
   },
   data () {
     return {

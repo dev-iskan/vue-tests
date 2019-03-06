@@ -271,3 +271,37 @@ in order to test vue router we can use several methods:
 
     expect(wrapper.find('a').props().to.name).toEqual('auth-signin')
   })
+
+
+in order to test async things we use jest.mock() method, it should be identical as axios method in component:
+jest.mock('axios', () => {
+    return {
+        get: () => Promise.resolve({
+            data: {
+                data: [
+                    {
+                        id: 1,
+                        body: 'First notification'
+                    },
+                    {
+                        id: 2,
+                        body: 'Second notification'
+                    }
+                ]
+            }
+        })
+    }
+})
+
+
+then we test but in order to process async method we wait next Dom update:
+it ('renders a list of notifications', () => {
+    let wrapper = mount(AppNotifications)
+
+    wrapper.vm.$nextTick(() => {
+        let items = wrapper.findAll('li')
+
+        expect(items.at(0).text()).toContain('First notification')
+        expect(items.at(1).text()).toContain('Second notification')
+    })
+})
