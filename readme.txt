@@ -350,3 +350,49 @@ or we can test if page is reditected to redirect query param:
 
     expect(wrapper.vm.$route.path).toEqual('/')
   })
+
+
+
+we can test if component contains child components: 
+  it ('renders a list of parts', () => {
+      let wrapper = mount(AppCoursePlaylist, {
+          propsData: {
+              course: {
+                  parts: [
+                      { id: 1, title: 'One' },
+                      { id: 2, title: 'Two' },
+                  ]
+              }
+          }
+      })
+
+      // expect that components in AppCoursePlaylist are exists
+      expect(wrapper.findAll(AppCoursePart).length).toEqual(2)
+  })
+
+
+
+and also we can test if ceratain method is called:
+  it ('plays a part when clicked', () => {
+      let wrapper = mount(AppCoursePart, {
+          propsData: {
+              part: {
+                  id: 1,
+                  title: 'One'
+              }
+          }
+      })
+
+      //create jest function which we can mock
+      let play = jest.fn()
+
+      //add mock function as mock
+      wrapper.setMethods({
+          play
+      })
+
+      wrapper.find('a').trigger('click')
+
+      // expect method played is called
+      expect(play).toBeCalled()
+  })
