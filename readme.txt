@@ -207,3 +207,67 @@ asserting event triggered correctly:
     // test if input event emitted
     expect(wrapper.emitted().input[0][0]).toEqual('cats')
   }) 
+
+
+in order to test vue router we can use several methods:
+
+  1. Simulate local Vue in test file with several attributes such as router:
+    import {mount, createLocalVue} from '@vue/test-utils'
+    import AppButton from '../AppButton'
+    import VueRouter from 'vue-router'
+
+    let localVue = createLocalVue()
+    localVue.use(VueRouter)
+
+    const router = new VueRouter({
+      mode: 'history',
+      routes: [
+        {
+          name: 'dashboard',
+          path: '/dashboard'
+        }
+      ]
+    })
+
+    and then test something with above code insertion:
+        it('renders button text', () => {
+          // add to wrapper our component
+          let wrapper = mount(AppButton, {
+            localVue, // add local vue 
+            router, // add local router
+            propsData: {
+              text: 'Dashboard',
+              to: {
+                name: 'dashboard'
+              }
+            }
+          })
+
+          expect(wrapper.find('a').text()).toContain('Dashboard')
+        })
+
+  
+  2. Simulate vue router as routerlinkstub:
+    import {mount, RouterLinkStub} from '@vue/test-utils'
+    import AppSignIn from '../AppSignIn'
+
+    const $route = {
+      fullPath: '/dashboard'
+    }
+
+
+    and insert mock in test:
+    
+    it('renders link correctly', () => {
+    // add to wrapper our component
+    let wrapper = mount(AppSignIn, {
+      stubs: {
+        RouterLink: RouterLinkStub
+      },
+      mocks: {
+        $route: $route
+      }
+    })
+
+    expect(wrapper.find('a').props().to.name).toEqual('auth-signin')
+  })
