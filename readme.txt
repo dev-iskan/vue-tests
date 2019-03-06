@@ -317,3 +317,36 @@ it ('clears up when destroyed', () => {
 })
 
 it tests whether player is destroyed after component to be destroyed
+
+
+
+
+In order to test if redirect page is correct we can use same logic as in AppButton but test final $route in SignIn:
+  it ('redirects to dashboard after signin', () => {
+      let wrapper = mount(SignIn, {
+        localVue,
+        router
+      })
+
+      wrapper.find('button').trigger('submit')
+
+      expect(wrapper.vm.$route.path).toEqual('/dashboard')
+  })
+
+
+or we can test if page is reditected to redirect query param:
+  it ('redirects to redirect query', () => {
+    router.push({
+      query: {
+        redirect: '/'
+      }
+    })
+    let wrapper = mount(SignIn, {
+      localVue,
+      router
+    })
+
+    wrapper.find('button').trigger('submit')
+
+    expect(wrapper.vm.$route.path).toEqual('/')
+  })
