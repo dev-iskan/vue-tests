@@ -19,6 +19,11 @@ export default new Router({
       component: () => import('./views/auth/SignIn.vue')
     },
     {
+      path: '/notifications',
+      name: 'notifications',
+      component: () => import('./views/Notifications.vue')
+    },
+    {
       path: '/dashboard',
       name: 'dashboard',
       // route level code-splitting

@@ -3,7 +3,7 @@
       {
           "id": 1,
           "body": "First notification",
-          "read": false
+          "read": true
       },
       {
           "id": 2,
