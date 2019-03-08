@@ -1,12 +1,14 @@
 <template>
-  <ul>
-    <li
-            v-for="notification in notifications"
-            :key="notification.id"
-        >
-            {{ notification.body }}
-        </li>
-  </ul>
+<ul>
+  <li
+    v-for="notification in notifications"
+    :key="notification.id"
+  >
+    {{ notification.body }}
+
+    <a href="#" @click.prevent="markNotificationRead(notification)">Mark read</a>
+  </li>
+</ul>
 </template>
 
 <script>
@@ -19,7 +21,8 @@
     },
     methods: {
       ...mapActions({
-        getNotifications: 'getNotifications'
+        getNotifications: 'getNotifications',
+        markNotificationRead: 'markNotificationRead'
       })
     },
     mounted () {
